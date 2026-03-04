@@ -4,11 +4,15 @@ import ImageWithSkeleton from "./ImageWithSkeleton.astro";
 
 const rawTeam = getDataFromFolders("./public/team");
 const team = rawTeam
-  .sort((a: any, b: any) => a.order - b.order)
   .map((t: any) => ({
     ...t,
     img: `/team/${t.folder}/${t.img}`,
-  }));
+  }))
+  .sort((a: any, b: any) => {
+    if (a.isLeader && !b.isLeader) return -1;
+    if (!a.isLeader && b.isLeader) return 1;
+    return a.order - b.order;
+  });
 
 const agents = team.filter((m: any) => !m.isLeader);
 const leader = team.find((m: any) => m.isLeader);
@@ -197,10 +201,10 @@ const agentLabel = (i: number) => `Asociado ${String(i + 1).padStart(2, "0")}`;
                   {member.isLeader ? "Humanoide" : agentLabel(agIdx)}
                 </span>
               </div>
-              <h3 class="relative z-10 font-sans font-900 text-[clamp(2rem,10vw,3rem)] leading-[0.9] text-brand-black mb-1 uppercase tracking-tight">{member.name}</h3>
-              <span class="relative z-10 text-[10px] font-sans font-bold tracking-[0.25em] text-brand-red uppercase mb-4">{member.role}</span>
-              <div class="relative z-10 w-full h-px bg-brand-black/20 mb-4" />
-              <p class="relative z-10 text-sm font-sans text-brand-black font-medium leading-snug">{member.desc}</p>
+              <h3 class="relative z-10 font-sans font-900 text-[clamp(2.5rem,12vw,4rem)] leading-[0.85] text-brand-black mb-2 uppercase tracking-tighter">{member.name}</h3>
+              <span class="relative z-10 text-[11px] font-sans font-bold tracking-[0.3em] text-brand-red uppercase mb-4">{member.role}</span>
+              <div class="relative z-10 w-full h-px bg-brand-black/20 mb-6" />
+              <p class="relative z-10 text-sm md:text-base font-sans text-brand-black font-medium leading-relaxed">{member.desc}</p>
             </div>
           </article>
         );

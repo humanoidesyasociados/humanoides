@@ -33,7 +33,7 @@ import SyncForm from "./SyncForm.astro";
     </div>
 
     <!-- Content Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:items-start">
       <!-- Left Column: Main Visual/Text -->
       <div class="hidden md:block text-left relative z-20">
         <div class="max-w-xl mx-auto md:mx-0">
@@ -99,21 +99,38 @@ import SyncForm from "./SyncForm.astro";
               </svg>
             </a>
           </div>
-          <a
-            href="https://calendly.com/humanoidesyasociados/sync"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-brand-black text-brand-gray text-sm font-bold tracking-normal hover:bg-brand-red hover:text-white w-full md:w-fit min-h-[44px]"
-            style="transition: background 0.08s linear, color 0.08s linear;"
-          >
-            <span>Agendar Una Cita</span>
-          </a>
+        </div>
+
+        <!-- Mobile Contact Info (Visible only on < md) -->
+        <div class="md:hidden mt-8 flex flex-col gap-6">
+          <div class="flex flex-col gap-1">
+            <span
+              class="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-red"
+              >Email</span
+            >
+            <a
+              href="mailto:hola@humanoides.as"
+              class="text-xl font-sans font-900 uppercase hover:text-brand-red"
+              >hola@humanoides.as</a
+            >
+          </div>
+          <div class="flex flex-col gap-1">
+            <span
+              class="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-red"
+              >WhatsApp / Tel</span
+            >
+            <a
+              href="tel:+34600088257"
+              class="text-xl font-sans font-900 uppercase hover:text-brand-red"
+              >+34 600 08 82 57</a
+            >
+          </div>
         </div>
       </div>
 
       <!-- Right Column: Form -->
       <div
-        class="relative w-full flex items-center justify-center md:justify-end"
+        class="relative w-full flex items-start justify-center md:justify-end"
       >
         <div class="relative z-20 w-full max-w-md">
           <SyncForm />
