@@ -164,7 +164,6 @@ const socialLinks = [
     const panelBottom = document.querySelector("#menu-panel-bottom");
     const navLinks = document.querySelectorAll(".nav-link");
     const mobileLinks = document.querySelectorAll(".mobile-nav-link");
-    const mobileSocials = document.querySelector(".mobile-socials");
     let isOpen = false;
 
     if (!toggle || !menu || !panelTop || !panelBottom) return;
@@ -200,17 +199,6 @@ const socialLinks = [
           ease: "expo.out",
         },
         "-=0.2",
-      )
-      .to(
-        [mobileSocials],
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          stagger: 0.1,
-          ease: "power2.out",
-        },
-        "-=0.6",
       );
 
     toggle.addEventListener("click", () => {
