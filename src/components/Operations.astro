@@ -23,19 +23,24 @@ const agentLabel = (i: number) => `Asociado ${String(i + 1).padStart(2, "0")}`;
 
 <!-- OPERATIONS / AGENTS SECTION -->
 <section
-  id="team"
-  class="relative w-full bg-brand-gray text-brand-black pt-16 md:pt-28 pb-0"
+  id="planta-ejecutiva"
+  class="relative w-full bg-brand-gray text-brand-black pt-16 md:pt-28 pb-0 gsap-reveal-section"
+  aria-label="Planta Ejecutiva — Humanoides y Agentes IA"
+  data-cursor="Team"
 >
-  <!-- Section Header -->
   <div class="max-w-[1440px] mx-auto w-full px-6">
-    <div class="flex flex-col mb-0">
+    <!-- Section Header — ghost number pattern -->
+    <div class="flex flex-col mb-8 md:mb-12">
       <div class="flex items-center gap-4 mb-4">
         <span
-          class="ops-counter font-sans font-900 text-[clamp(3rem,8vw,7rem)] leading-none text-brand-black/10 select-none tabular-nums"
-          aria-hidden="true">03</span>
+          class="font-sans font-100 text-[clamp(3rem,8vw,7rem)] leading-none text-brand-red select-none tabular-nums"
+          aria-hidden="true">03</span
+        >
+        >
         <div class="flex flex-col">
-          <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red font-sans"
-            >Directorio Corporativo</span
+          <span
+            class="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-red font-sans"
+            >Humanos (y no tanto)</span
           >
           <h2
             class="font-sans font-900 text-[clamp(1.4rem,3.5vw,3rem)] leading-none tracking-tight text-brand-black uppercase"
@@ -44,6 +49,7 @@ const agentLabel = (i: number) => `Asociado ${String(i + 1).padStart(2, "0")}`;
           </h2>
         </div>
       </div>
+      <!-- Animated divider -->
       <div class="ops-divider w-full h-px bg-brand-black origin-left"></div>
     </div>
   </div>
@@ -73,13 +79,13 @@ const agentLabel = (i: number) => `Asociado ${String(i + 1).padStart(2, "0")}`;
                 class="absolute top-0 right-0 z-20 bg-brand-red hover:bg-brand-black transition-colors duration-150 px-4 py-3 flex items-center gap-2"
                 aria-label="Descargar Currículum de David"
               >
-                <svg class="w-5 h-5 text-white shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <svg class="w-5 h-5 text-brand-gray shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                   <polyline points="14 2 14 8 20 8"/>
                   <line x1="12" y1="12" x2="12" y2="18"/>
                   <polyline points="9 15 12 18 15 15"/>
                 </svg>
-                <span class="text-[10px] font-sans font-900 tracking-[0.2em] uppercase text-white whitespace-nowrap">Ver CV</span>
+                <span class="text-[10px] font-sans font-900 tracking-[0.2em] uppercase text-brand-gray whitespace-nowrap">Ver CV</span>
               </a>
             )}
           </div>
@@ -134,7 +140,7 @@ const agentLabel = (i: number) => `Asociado ${String(i + 1).padStart(2, "0")}`;
             </div>
             <h3 class="relative z-10 font-sans font-900 text-[clamp(1.6rem,2.2vw,2.5rem)] leading-[0.9] text-brand-black mb-2 uppercase tracking-tight">{member.name}</h3>
             <span class="relative z-10 text-[10px] font-sans font-bold tracking-[0.25em] text-brand-red uppercase mb-4">{member.role}</span>
-            <div class="ops-desc-line relative z-10 w-full h-px bg-brand-black/20 origin-left mb-4" />
+            <div class="ops-desc-line relative z-10 w-full h-px bg-brand-black origin-left mb-4" />
             <p class="relative z-10 text-sm font-sans text-brand-black font-medium leading-snug mt-auto">{member.desc}</p>
           </div>
         </article>
@@ -145,7 +151,7 @@ const agentLabel = (i: number) => `Asociado ${String(i + 1).padStart(2, "0")}`;
 
   <!-- MOBILE: Scroll-snap Carousel -->
   <div class="md:hidden w-full">
-    <div class="w-full h-px bg-brand-black/20 relative overflow-hidden">
+    <div class="w-full h-px bg-brand-black relative overflow-hidden">
       <div
         id="ops-progress"
         class="absolute top-0 left-0 h-full bg-brand-red origin-left transition-transform duration-300"
@@ -176,13 +182,13 @@ const agentLabel = (i: number) => `Asociado ${String(i + 1).padStart(2, "0")}`;
                   class="absolute top-0 right-0 z-10 bg-brand-red hover:bg-brand-black transition-colors px-4 py-3 flex items-center gap-2"
                   aria-label="Descargar CV"
                 >
-                  <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <svg class="w-5 h-5 text-brand-gray" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                     <polyline points="14 2 14 8 20 8"/>
                     <line x1="12" y1="12" x2="12" y2="18"/>
                     <polyline points="9 15 12 18 15 15"/>
                   </svg>
-                  <span class="text-[10px] font-sans font-900 tracking-[0.2em] uppercase text-white">Ver CV</span>
+                  <span class="text-[10px] font-sans font-900 tracking-[0.2em] uppercase text-brand-gray">Ver CV</span>
                 </a>
               )}
             </div>
@@ -203,7 +209,7 @@ const agentLabel = (i: number) => `Asociado ${String(i + 1).padStart(2, "0")}`;
               </div>
               <h3 class="relative z-10 font-sans font-900 text-[clamp(2.5rem,12vw,4rem)] leading-[0.85] text-brand-black mb-2 uppercase tracking-tighter">{member.name}</h3>
               <span class="relative z-10 text-[11px] font-sans font-bold tracking-[0.3em] text-brand-red uppercase mb-4">{member.role}</span>
-              <div class="relative z-10 w-full h-px bg-brand-black/20 mb-6" />
+              <div class="relative z-10 w-full h-px bg-brand-black mb-6" />
               <p class="relative z-10 text-sm md:text-base font-sans text-brand-black font-medium leading-relaxed">{member.desc}</p>
             </div>
           </article>

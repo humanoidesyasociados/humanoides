@@ -68,14 +68,20 @@ const projects = await Promise.all(
 );
 ---
 
-<section id="portafolio" class="w-full bg-brand-gray text-brand-black mb-12 md:mb-16">
+<section
+  id="casos-estudio"
+  class="w-full bg-brand-gray text-brand-black mb-12 md:mb-16 gsap-reveal-section"
+  aria-label="Casos de Estudio"
+  data-cursor="Explorar"
+>
   <div class="w-full max-w-[1440px] mx-auto px-6 pt-16 md:pt-24">
     <!-- Section Header — ghost number pattern -->
-    <div class="flex flex-col mb-0">
+    <div class="flex flex-col mb-8 md:mb-12">
       <div class="flex items-center gap-4 mb-4">
         <span
-          class="font-sans font-900 text-[clamp(3rem,8vw,7rem)] leading-none text-brand-black/10 select-none tabular-nums"
+          class="font-sans font-100 text-[clamp(3rem,8vw,7rem)] leading-none text-brand-red select-none tabular-nums"
           aria-hidden="true">01</span
+        >
         >
         <div class="flex flex-col">
           <span
@@ -90,7 +96,7 @@ const projects = await Promise.all(
         </div>
       </div>
       <!-- Animated divider -->
-      <div class="port-divider w-full h-px bg-brand-black origin-left mb-0"></div>
+      <div class="port-divider w-full h-px bg-brand-black origin-left"></div>
     </div>
   </div>
 
@@ -107,7 +113,6 @@ const projects = await Promise.all(
       <div class="col-span-1 text-right">acción</div>
     </div>
 
-    <!-- Project Rows -->
     <!-- Mobile Carousel Navigation Strip -->
     <div
       class="w-full border-y border-brand-black py-3 flex lg:hidden justify-between items-center text-xs font-sans font-bold tracking-widest text-brand-black mb-6 px-0"
@@ -144,10 +149,10 @@ const projects = await Promise.all(
           </div>
           <div class="relative z-10 flex flex-col p-6 grow justify-end">
               <div class="mb-4">
-                  <h3 class="text-3xl font-sans font-900 capitalize tracking-tighter leading-none text-white mb-1">{projects[projects.length - 1].client}</h3>
-                  <p class="text-lg font-sans font-normal leading-tight text-white/90">{projects[projects.length - 1].service}</p>
+                  <h3 class="text-3xl font-sans font-900 capitalize tracking-tighter leading-none text-brand-gray mb-1">{projects[projects.length - 1].client}</h3>
+                  <p class="text-lg font-sans font-normal leading-tight text-brand-gray">{projects[projects.length - 1].service}</p>
               </div>
-              <a href={projects[projects.length - 1].url} class="w-full py-4 bg-white text-brand-black border border-white flex items-center justify-center gap-2 text-sm font-bold tracking-normal hover:bg-brand-red hover:text-white hover:border-brand-red transition-colors" style="transition: background 0.08s linear, color 0.08s linear, border-color 0.08s linear;">
+              <a href={projects[projects.length - 1].url} class="w-full py-4 bg-brand-gray text-brand-black border border-brand-gray flex items-center justify-center gap-2 text-sm font-bold tracking-normal hover:bg-brand-red hover:text-brand-gray hover:border-brand-red transition-colors" style="transition: background 0.08s linear, color 0.08s linear, border-color 0.08s linear;">
                 Ver Proyecto <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
               </a>
           </div>
@@ -173,17 +178,17 @@ const projects = await Promise.all(
 
             <div class="relative z-10 flex flex-col p-6 grow justify-end">
                 <div class="mb-4">
-                    <h3 class="text-4xl font-sans font-900 uppercase tracking-tighter leading-none text-white mb-2">
+                    <h3 class="text-4xl font-sans font-900 uppercase tracking-tighter leading-none text-brand-gray mb-2">
                         {project.client}
                     </h3>
-                    <p class="text-sm font-sans font-bold uppercase tracking-widest text-white/90">
+                    <p class="text-sm font-sans font-bold uppercase tracking-widest text-brand-gray">
                         {project.service}
                     </p>
                 </div>
 
                 <a
                   href={project.url}
-                  class="inline-flex items-center gap-2 px-6 py-3 bg-white text-brand-black text-xs font-bold hover:bg-brand-red hover:text-white"
+                  class="inline-flex items-center gap-2 px-6 py-3 bg-brand-gray text-brand-black text-xs font-bold hover:bg-brand-red hover:text-brand-gray"
                   style="transition: background 0.08s linear, color 0.08s linear;"
                   aria-label={`Ver proyecto: ${project.client}`}
                 >
@@ -219,12 +224,12 @@ const projects = await Promise.all(
           </div>
           <div class="relative z-10 flex flex-col p-6 grow justify-end">
               <div class="mb-4">
-                  <h3 class="text-3xl font-sans font-900 capitalize tracking-tighter leading-none text-white mb-1">{projects[0].client}</h3>
-                  <p class="text-lg font-sans font-normal leading-tight text-white/90">{projects[0].service}</p>
+                  <h3 class="text-3xl font-sans font-900 capitalize tracking-tighter leading-none text-brand-gray mb-1">{projects[0].client}</h3>
+                  <p class="text-lg font-sans font-normal leading-tight text-brand-gray">{projects[0].service}</p>
               </div>
               <a
                 href={projects[0].url}
-                class="inline-flex items-center gap-2 px-6 py-3 bg-white text-brand-black text-xs font-bold hover:bg-brand-red hover:text-white"
+                class="inline-flex items-center gap-2 px-6 py-3 bg-brand-gray text-brand-black text-xs font-bold hover:bg-brand-red hover:text-brand-gray"
                 style="transition: background 0.08s linear, color 0.08s linear;"
                 aria-label={`Ver proyecto: ${projects[0].client}`}
               >

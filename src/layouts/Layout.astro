@@ -223,5 +223,40 @@ const { title = "HA", showNavbar = true, showFooter = true } = Astro.props;
         { capture: true },
       );
     </script>
+    <!-- Global GSAP Section Reveal Animations -->
+    <script>
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      document.addEventListener("astro:page-load", () => {
+        const sections = document.querySelectorAll<HTMLElement>(
+          ".gsap-reveal-section",
+        );
+
+        sections.forEach((section) => {
+          gsap.set(section, {
+            clipPath: "polygon(0% 12%, 100% 0%, 100% 100%, 0% 100%)",
+            opacity: 0,
+            y: 50,
+          });
+
+          gsap.to(section, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "expo.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 85%",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
+            },
+          });
+        });
+      });
+    </script>
   </body>
 </html>

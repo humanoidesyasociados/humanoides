@@ -24,7 +24,8 @@ const logos = rawLogos.map((l) => ({
     <!-- Hero Section -->
     <section
       id="hero"
-      class="relative w-full h-screen flex flex-col mt-0 bg-brand-black"
+      class="relative w-full min-h-[100svh] flex flex-col bg-brand-gray gsap-reveal-section"
+      aria-label="Introducción"
     >
       <!-- Background Image -->
       <div class="absolute inset-0 z-0">
@@ -35,7 +36,7 @@ const logos = rawLogos.map((l) => ({
           loading="eager"
           decoding="sync"
           fetchpriority="high"
-          widths={[800, 1200, 1440, 1920, 2560]}
+          widths={[800, 1200, 1920]}
           sizes="100vw"
           quality={80}
         />
@@ -48,24 +49,23 @@ const logos = rawLogos.map((l) => ({
       >
         <div class="max-w-[1440px] w-full text-left md:text-right px-6">
           <h1
-            class="font-sans font-900 text-brand-red mb-4 md:mb-12"
-            style="font-size: clamp(3.5rem, 12vw, 180px); line-height: .9; letter-spacing: -0.04em;"
+            class="font-sans font-900 text-brand-red mb-12 md:mb-12 tracking-tighter"
+            style="font-size: clamp(4.5rem, 15vw, 180px); line-height: .9;"
           >
             Make Internet <br />Work Again
           </h1>
           <p
-            class="font-500 max-w-md md:max-w-3xl md:ml-auto text-brand-gray mb-6 md:mb-8"
-            style="font-size: clamp(1.1rem, 2.5vw, 2rem); line-height: 1.1;"
+            class="font-light max-w-md md:max-w-3xl md:ml-auto text-brand-gray mb-14 md:mb-8"
+            style="font-size: clamp(1.35rem, 2.5vw, 2rem); line-height: 1.1;"
           >
-            Diseñamos y lanzamos productos digitales con criterio lógico,
-            estético y narrativo.
+            Creamos proyectos con instinto humano. Todavía.
           </p>
-          <div class="flex justify-start md:justify-end mb-0">
+          <div class="flex justify-start md:justify-end mb-0 mt-8 md:mt-0">
             <a
               href="https://wa.me/34600088257"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex w-full md:w-auto items-center justify-center md:justify-start gap-3 px-6 md:px-12 py-5 md:py-6 bg-brand-red text-brand-gray font-bold tracking-normal hover:bg-brand-black hover:text-white min-h-[44px]"
+              class="inline-flex w-full md:w-auto items-center justify-center md:justify-start gap-3 px-6 md:px-12 py-5 md:py-6 bg-brand-red text-brand-gray font-bold tracking-normal hover:bg-brand-black hover:text-brand-gray min-h-[44px]"
               style="font-size: clamp(1rem, 1.2vw, 1.125rem); transition: background 0.08s linear, color 0.08s linear;"
             >
               <span>Empezar Proyecto</span>
@@ -82,7 +82,8 @@ const logos = rawLogos.map((l) => ({
           <!-- Strip A -->
           <div class="marquee-strip flex items-center shrink-0">
             {
-              logos.map((logo) => (
+              // Triplicate logos to ensure strip width > 100vw
+              [...logos, ...logos, ...logos].map((logo) => (
                 <div class="h-8 md:h-12 w-28 md:w-32 shrink-0 flex items-center justify-center mx-6 md:mx-12">
                   {logo.href ? (
                     <a
@@ -111,7 +112,8 @@ const logos = rawLogos.map((l) => ({
             aria-hidden="true"
           >
             {
-              logos.map((logo) => (
+              // Triplicate logos in Strip B too
+              [...logos, ...logos, ...logos].map((logo) => (
                 <div class="h-8 md:h-12 w-28 md:w-32 shrink-0 flex items-center justify-center mx-6 md:mx-12">
                   {logo.href ? (
                     <a

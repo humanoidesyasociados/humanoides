@@ -26,7 +26,7 @@ const offset = circumference - (value / 100) * circumference;
         fill="transparent"
         stroke="currentColor"
         stroke-width={strokeWidth}
-        class="text-white/10"></circle>
+        class="text-brand-salmon"></circle>
       <!-- Progress -->
       <circle
         cx={size / 2}
@@ -41,11 +41,11 @@ const offset = circumference - (value / 100) * circumference;
         class="text-brand-red transition-all duration-1000 ease-out"></circle>
     </svg>
     <div class="absolute inset-0 flex items-center justify-center">
-      <span class="text-3xl font-sans font-bold text-white">{value}%</span>
+      <span class="text-3xl font-sans font-bold text-brand-gray">{value}%</span>
     </div>
   </div>
   <span
-    class="text-xs font-sans font-bold text-brand-red opacity-80 text-center mt-3 leading-tight uppercase tracking-wide"
+    class="text-xs font-sans font-bold text-brand-red text-center mt-3 leading-tight uppercase tracking-wide"
   >
     {label}
   </span>
