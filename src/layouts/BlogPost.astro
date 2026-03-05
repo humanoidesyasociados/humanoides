@@ -25,7 +25,8 @@ const { title, description, pubDate, updatedDate, heroImage, author } =
                 >
                     <div class="w-full md:w-3/4">
                         <h1
-                            class="font-sans text-brand-red text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-none mb-6"
+                            class="font-sans text-brand-red font-900 uppercase tracking-tighter leading-none mb-6"
+                            style="font-size: clamp(2.5rem, 7vw, 7rem); letter-spacing: -0.04em;"
                         >
                             {title}
                         </h1>
@@ -80,14 +81,15 @@ const { title, description, pubDate, updatedDate, heroImage, author } =
 <style is:global>
     /* Manual Brutalist Styling for Markdown Content */
     .mdx-content h2 {
-        font-size: 2.5rem;
-        font-weight: 700;
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: 100;
         margin-top: 4rem;
         margin-bottom: 2rem;
-        border-bottom: 1px solid var(--color-brand-black);
         padding-bottom: 0.5rem;
         letter-spacing: -0.05em;
-        color: var(--color-brand-red);
+        text-transform: uppercase;
+        color: var(--color-brand-black);
+        line-height: 1.1;
     }
 
     .mdx-content h3 {
@@ -95,6 +97,7 @@ const { title, description, pubDate, updatedDate, heroImage, author } =
         font-weight: 600;
         margin-top: 3rem;
         margin-bottom: 1.5rem;
+        color: var(--color-brand-black);
     }
 
     .mdx-content p {
@@ -130,10 +133,11 @@ const { title, description, pubDate, updatedDate, heroImage, author } =
         padding-left: 1.5rem;
         margin: 2rem 0;
         font-style: italic;
-        font-size: 1.25rem;
+        font-size: clamp(1.25rem, 2.5vw, 1.75rem);
         background-color: transparent;
-        padding: 1rem;
+        padding: 1rem 1.5rem;
         color: var(--color-brand-black);
+        line-height: 1.4;
     }
 
     .mdx-content pre {
