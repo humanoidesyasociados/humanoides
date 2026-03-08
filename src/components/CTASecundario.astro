@@ -14,10 +14,14 @@ const WA_URL = `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${WA_MESSAG
 
 <section
     id="cta-secundario"
-    class="w-full bg-brand-red border-y border-brand-red"
+    class="w-full border-y border-brand-red relative overflow-hidden"
     aria-label="Llamada a la acción — Trabajar juntos"
 >
-    <div class="w-full max-w-[1440px] mx-auto px-6 py-16 md:py-24 relative">
+    <!-- Animated background -->
+    <img src="/cta.webp" alt="" aria-hidden="true" class="cta-bg-anim" />
+    <div
+        class="w-full max-w-[1440px] mx-auto px-6 py-16 md:py-24 relative z-10"
+    >
         <!-- Ghost number — decorative, patrón establecido -->
         <span
             id="cta-ghost-num"
@@ -114,6 +118,36 @@ const WA_URL = `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${WA_MESSAG
 </section>
 
 <style>
+    /* ─── CTA Background Animation ──────────────────────────────────────────────
+       Edita estas variables para controlar la imagen de fondo animada:
+       --cta-bg-object-position : punto focal del recorte (ej. "center", "top right")
+       --cta-bg-scale           : zoom extra sobre el cover base (ej. 1.05 para un 5% zoom)
+       --cta-bg-opacity         : transparencia (0 = invisible, 1 = sólida)
+       --cta-bg-blend           : modo de mezcla CSS (normal, multiply, overlay…)
+    ─────────────────────────────────────────────────────────────────────────── */
+    #cta-secundario {
+        --cta-bg-object-position: center center;
+        --cta-bg-scale: 1;
+        --cta-bg-opacity: 0.35;
+        --cta-bg-blend: normal;
+        background-color: var(--color-brand-red, #fa2a2a);
+    }
+    .cta-bg-anim {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: var(--cta-bg-object-position);
+        transform: scale(var(--cta-bg-scale));
+        opacity: var(--cta-bg-opacity);
+        mix-blend-mode: var(--cta-bg-blend);
+        pointer-events: none;
+        user-select: none;
+        z-index: 0;
+    }
+
+    /* ─── Reveal animation ───────────────────────────────────────────────────── */
     .cta-reveal {
         opacity: 0;
         transform: translateY(22px);
