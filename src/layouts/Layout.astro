@@ -123,10 +123,12 @@ const { title = "HA", showNavbar = true, showFooter = true } = Astro.props;
     <link
       rel="preload"
       as="image"
-      href="/src/assets/hero_studio.png"
-      type="image/png"
+      href="/hero-bg.webp"
+      type="image/webp"
       fetchpriority="high"
     />
+    <!-- DNS prefetch for analytics -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
     <!-- Preload Self-Hosted Font -->
     <link
@@ -246,10 +248,12 @@ const { title = "HA", showNavbar = true, showFooter = true } = Astro.props;
           });
         }
 
-        // Refresh after images/fonts load to recalculate positions
-        ScrollTrigger.refresh();
-        setTimeout(() => ScrollTrigger.refresh(), 300);
-        setTimeout(() => ScrollTrigger.refresh(), 1000);
+        // Refresh scroll triggers once layout is settled
+        if (typeof requestIdleCallback !== "undefined") {
+          requestIdleCallback(() => ScrollTrigger.refresh());
+        } else {
+          setTimeout(() => ScrollTrigger.refresh(), 300);
+        }
       });
 
       document.addEventListener("astro:after-swap", () => {

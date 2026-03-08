@@ -18,7 +18,14 @@ const WA_URL = `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${WA_MESSAG
   aria-label="Llamada a la acción — Trabajar juntos"
 >
   <!-- Animated background -->
-  <img src="/cta.webp" alt="" aria-hidden="true" class="cta-bg-anim" />
+  <img
+    src="/cta.webp"
+    alt=""
+    aria-hidden="true"
+    class="cta-bg-anim"
+    loading="lazy"
+    decoding="async"
+  />
   <div class="w-full max-w-[1440px] mx-auto px-6 py-16 md:py-24 relative z-10">
     <!-- Ghost number — decorative, patrón establecido -->
     <span
