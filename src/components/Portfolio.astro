@@ -70,7 +70,7 @@ const projects = await Promise.all(
 
 <section
   id="portafolio"
-  class="w-full bg-brand-gray text-brand-black mb-12 md:mb-16 gsap-reveal-section"
+  class="w-full bg-brand-gray text-brand-black mb-12 md:mb-16"
   aria-label="Casos de Estudio"
   data-cursor="Explorar"
 >
@@ -502,7 +502,6 @@ const projects = await Promise.all(
               overwrite: true,
             });
           },
-          once: true,
         });
       }
 
@@ -522,9 +521,9 @@ const projects = await Promise.all(
               overwrite: true,
             });
           },
-          once: true,
         });
       }
+      ScrollTrigger.refresh();
     }
   });
 </script>

@@ -14,7 +14,7 @@ const WA_URL = `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${WA_MESSAG
 
 <section
     id="cta-secundario"
-    class="w-full bg-brand-red border-y border-brand-red gsap-reveal-section"
+    class="w-full bg-brand-red border-y border-brand-red"
     aria-label="Llamada a la acción — Trabajar juntos"
 >
     <div class="w-full max-w-[1440px] mx-auto px-6 py-16 md:py-24 relative">
@@ -135,52 +135,53 @@ const WA_URL = `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${WA_MESSAG
 </style>
 
 <script>
-    const prefersReduced = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const section = document.getElementById("cta-secundario");
-    const ghostNum = document.getElementById(
-        "cta-ghost-num",
-    ) as HTMLElement | null;
+    document.addEventListener("astro:page-load", () => {
+        const prefersReduced = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+        const section = document.getElementById("cta-secundario");
+        const ghostNum = document.getElementById(
+            "cta-ghost-num",
+        ) as HTMLElement | null;
 
-    // Parallax on ghost number
-    if (!prefersReduced && section && ghostNum) {
-        const onScroll = () => {
-            requestAnimationFrame(() => {
-                const rect = section.getBoundingClientRect();
-                const vh = window.innerHeight;
-                const progress = 1 - rect.top / vh;
-                if (progress > -0.5 && progress < 1.8) {
-                    ghostNum.style.transform = `translateY(calc(-50% + ${progress * 60}px))`;
-                }
-            });
-        };
-        window.addEventListener("scroll", onScroll, { passive: true });
-    }
+        // Parallax on ghost number
+        if (!prefersReduced && section && ghostNum) {
+            const onScroll = () => {
+                requestAnimationFrame(() => {
+                    const rect = section.getBoundingClientRect();
+                    const vh = window.innerHeight;
+                    const progress = 1 - rect.top / vh;
+                    if (progress > -0.5 && progress < 1.8) {
+                        ghostNum.style.transform = `translateY(calc(-50% + ${progress * 60}px))`;
+                    }
+                });
+            };
+            window.addEventListener("scroll", onScroll, { passive: true });
+        }
 
-    // Staggered reveal for all .cta-reveal elements
-    if (!prefersReduced) {
+        // Staggered reveal for all .cta-reveal elements
         const reveals = document.querySelectorAll<HTMLElement>(
             "#cta-secundario .cta-reveal",
         );
-        const io = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        (entry.target as HTMLElement).classList.add(
-                            "is-visible",
-                        );
-                        io.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.05 },
-        );
-        reveals.forEach((el) => io.observe(el));
-    } else {
-        // No-JS / reduced-motion: make everything visible immediately
-        document
-            .querySelectorAll<HTMLElement>("#cta-secundario .cta-reveal")
-            .forEach((el) => el.classList.add("is-visible"));
-    }
+
+        if (!prefersReduced) {
+            const io = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            (entry.target as HTMLElement).classList.add(
+                                "is-visible",
+                            );
+                            io.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.05 },
+            );
+            reveals.forEach((el) => io.observe(el));
+        } else {
+            // No-JS / reduced-motion: make everything visible immediately
+            reveals.forEach((el) => el.classList.add("is-visible"));
+        }
+    });
 </script>
