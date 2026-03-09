@@ -17,35 +17,61 @@ const { title = "HA", showNavbar = true, showFooter = true } = Astro.props;
 <!doctype html>
 <html lang="es">
   <head>
-    <!-- Google Tag Manager -->
+    <!-- Google Tag Manager & GA4 (Deferred for Performance) -->
     <script is:inline>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-WDFWL49V");
-    </script>
-    <!-- End Google Tag Manager -->
+      function loadGTM() {
+        if (window.gtmLoaded) return;
+        window.gtmLoaded = true;
 
-    <!-- Google Analytics 4 -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-YESCC5Q2ZC"
-      is:inline></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
+        // Init dataLayer
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", "G-YESCC5Q2ZC");
+
+        // Load GA4
+        const gaScript = document.createElement("script");
+        gaScript.src =
+          "https://www.googletagmanager.com/gtag/js?id=G-YESCC5Q2ZC";
+        gaScript.async = true;
+        document.head.appendChild(gaScript);
+
+        // Load GTM
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", "GTM-WDFWL49V");
       }
-      gtag("js", new Date());
-      gtag("config", "G-YESCC5Q2ZC");
+
+      // Load on interaction or after 3.5s
+      const events = ["scroll", "mousemove", "touchstart", "keydown"];
+      let timeoutId = setTimeout(loadGTM, 3500);
+
+      events.forEach(function (e) {
+        window.addEventListener(
+          e,
+          function () {
+            clearTimeout(timeoutId);
+            loadGTM();
+            events.forEach(function (evt) {
+              window.removeEventListener(evt, arguments.callee, {
+                capture: true,
+              });
+            });
+          },
+          { once: true, passive: true, capture: true },
+        );
+      });
     </script>
-    <!-- End Google Analytics 4 -->
+    <!-- End Deferred Google Tag Manager & GA4 -->
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />

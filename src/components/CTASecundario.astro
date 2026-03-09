@@ -2,14 +2,8 @@
 /**
  * CTASecundario — Section post-Portfolio
  * Contrasting brand-black background, brutalist golden-ratio layout.
- * CTA links to WhatsApp with a predefined message.
+ * CTA links to Contact sync form.
  */
-
-const WA_PHONE = "34600088257";
-const WA_MESSAGE = encodeURIComponent(
-  "Hola Humanoides & Asociados, acabo de ver su portfolio y me interesa trabajar con ustedes. ¿Podemos hablar?",
-);
-const WA_URL = `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${WA_MESSAGE}`;
 ---
 
 <section
@@ -47,7 +41,7 @@ const WA_URL = `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${WA_MESSAG
           class="font-sans font-900 text-brand-gray uppercase leading-none tracking-tight cta-reveal"
           style="font-size: clamp(2.5rem, 7vw, 7rem); letter-spacing: -0.04em; transition-delay: 0.08s;"
         >
-          Creamos sinapsis<br />
+          Creamos sinapsis,<br />
           no prompts.
         </h2>
 
@@ -70,9 +64,7 @@ const WA_URL = `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${WA_MESSAG
 
         <!-- CTA Button -->
         <a
-          href={WA_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/#contacto"
           class="group inline-flex items-center gap-3 px-10 py-6 bg-brand-black text-brand-gray font-bold min-h-[44px] w-full lg:w-auto justify-center lg:justify-start"
           style="font-size: clamp(0.875rem, 1.2vw, 1.125rem); transition: background 0.08s linear, color 0.08s linear;"
           aria-label="Contactar por WhatsApp"
