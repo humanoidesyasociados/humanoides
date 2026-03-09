@@ -28,14 +28,21 @@ const logos = rawLogos.map((l) => ({
     >
       <!-- Background Image -->
       <div class="absolute inset-0 z-0">
-        <img
-          src="/hero-bg.webp"
-          alt="Industrial Creative Studio"
-          class="w-full h-full object-cover object-center md:object-center opacity-60 grayscale"
-          loading="eager"
-          decoding="sync"
-          fetchpriority="high"
-        />
+        <picture>
+          <source
+            media="(min-width: 768px)"
+            srcset="/hero-bg.webp"
+            type="image/webp"
+          />
+          <img
+            src="/hero-bg-mobile.webp"
+            alt="Industrial Creative Studio"
+            class="w-full h-full object-cover object-center md:object-center opacity-60 grayscale"
+            loading="eager"
+            decoding="sync"
+            fetchpriority="high"
+          />
+        </picture>
       </div>
       <div class="absolute inset-0 z-5 bg-brand-black/70 md:bg-brand-black/60">
       </div>

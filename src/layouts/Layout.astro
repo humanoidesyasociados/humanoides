@@ -158,6 +158,15 @@ const { title = "HA", showNavbar = true, showFooter = true } = Astro.props;
       as="image"
       href="/hero-bg.webp"
       type="image/webp"
+      media="(min-width: 768px)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/hero-bg-mobile.webp"
+      type="image/webp"
+      media="(max-width: 767px)"
       fetchpriority="high"
     />
     <!-- DNS prefetch & Preconnect for analytics -->
