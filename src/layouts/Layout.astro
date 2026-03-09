@@ -19,57 +19,65 @@ const { title = "HA", showNavbar = true, showFooter = true } = Astro.props;
   <head>
     <!-- Google Tag Manager & GA4 (Deferred for Performance) -->
     <script is:inline>
-      function loadGTM() {
-        if (window.gtmLoaded) return;
-        window.gtmLoaded = true;
+      (function () {
+        var loaded = false;
+        function loadGTM() {
+          if (loaded) return;
+          loaded = true;
 
-        // Init dataLayer
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          window.gtag = gtag;
+          gtag("js", new Date());
+          gtag("config", "G-YESCC5Q2ZC");
+
+          var ga = document.createElement("script");
+          ga.src = "https://www.googletagmanager.com/gtag/js?id=G-YESCC5Q2ZC";
+          ga.async = true;
+          document.head.appendChild(ga);
+
+          (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+            var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s),
+              dl = l != "dataLayer" ? "&l=" + l : "";
+            j.async = true;
+            j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, "script", "dataLayer", "GTM-WDFWL49V");
         }
-        gtag("js", new Date());
-        gtag("config", "G-YESCC5Q2ZC");
 
-        // Load GA4
-        const gaScript = document.createElement("script");
-        gaScript.src =
-          "https://www.googletagmanager.com/gtag/js?id=G-YESCC5Q2ZC";
-        gaScript.async = true;
-        document.head.appendChild(gaScript);
+        // Use requestIdleCallback with 6s hard timeout
+        var timer;
+        if (typeof requestIdleCallback !== "undefined") {
+          timer = requestIdleCallback(loadGTM, { timeout: 6000 });
+        } else {
+          timer = setTimeout(loadGTM, 6000);
+        }
 
-        // Load GTM
-        (function (w, d, s, l, i) {
-          w[l] = w[l] || [];
-          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-          var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s),
-            dl = l != "dataLayer" ? "&l=" + l : "";
-          j.async = true;
-          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-          f.parentNode.insertBefore(j, f);
-        })(window, document, "script", "dataLayer", "GTM-WDFWL49V");
-      }
-
-      // Load on interaction or after 3.5s
-      const events = ["scroll", "mousemove", "touchstart", "keydown"];
-      let timeoutId = setTimeout(loadGTM, 3500);
-
-      events.forEach(function (e) {
-        window.addEventListener(
-          e,
-          function () {
-            clearTimeout(timeoutId);
-            loadGTM();
-            events.forEach(function (evt) {
-              window.removeEventListener(evt, arguments.callee, {
-                capture: true,
-              });
-            });
-          },
-          { once: true, passive: true, capture: true },
-        );
-      });
+        // Also load immediately on first user interaction
+        var evts = ["scroll", "mousemove", "touchstart", "keydown", "click"];
+        function onInteract() {
+          if (typeof timer !== "undefined") {
+            typeof requestIdleCallback !== "undefined"
+              ? cancelIdleCallback(timer)
+              : clearTimeout(timer);
+          }
+          evts.forEach(function (e) {
+            window.removeEventListener(e, onInteract, { capture: true });
+          });
+          loadGTM();
+        }
+        evts.forEach(function (e) {
+          window.addEventListener(e, onInteract, {
+            passive: true,
+            capture: true,
+          });
+        });
+      })();
     </script>
     <!-- End Deferred Google Tag Manager & GA4 -->
 
@@ -126,7 +134,6 @@ const { title = "HA", showNavbar = true, showFooter = true } = Astro.props;
             "name": "Humanoides & Asociados",
             "url": "https://humanoidesyasociados.com",
             "logo": "https://humanoidesyasociados.com/humanoides-logo.svg",
-            "email": "hola@humanoidesyasociados.com",
             "address": {
               "@type": "PostalAddress",
               "addressCountry": "PE"
@@ -153,7 +160,12 @@ const { title = "HA", showNavbar = true, showFooter = true } = Astro.props;
       type="image/webp"
       fetchpriority="high"
     />
-    <!-- DNS prefetch for analytics -->
+    <!-- DNS prefetch & Preconnect for analytics -->
+    <link
+      rel="preconnect"
+      href="https://www.googletagmanager.com"
+      crossorigin
+    />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
     <!-- Preload Self-Hosted Font -->
