@@ -4,7 +4,6 @@ dotenv.config();
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
 import { z } from 'zod';
-import geoip from 'geoip-lite';
 
 const leadSchema = z.object({
   name: z.string().optional(),
@@ -20,14 +19,20 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     // Validate payload
     const parsedData = leadSchema.parse(data);
 
-    // Get IP address (Vercel uses x-forwarded-for, local uses clientAddress)
+    // Get IP address
     const ip = request.headers.get('x-forwarded-for') || clientAddress || '127.0.0.1';
     
-    // Lookup Country and City
-    const geo = geoip.lookup(ip);
-    const pais = geo ? geo.country : 'Desconocido';
-    const ciudad = geo ? geo.city : 'Desconocida';
-    const ubicacion = `${ciudad}, ${pais}`.replace(/^, /, ''); // Clean up trailing comma if city is unknown
+    // Use Vercel's native Geolocation Headers
+    // Vercel automatically injects these headers in production
+    const pais = request.headers.get('x-vercel-ip-country') || 'Desconocido';
+    let ciudad = request.headers.get('x-vercel-ip-city') || 'Desconocida';
+    
+    // Decode Vercel City (sometimes it's URL encoded like Sao%20Paulo)
+    try {
+      ciudad = decodeURIComponent(ciudad);
+    } catch(e) {}
+
+    const ubicacion = `${ciudad}, ${pais}`;
 
     // Format Date and Time for Barcelona (Europe/Madrid timezone)
     const now = new Date();
