@@ -23,7 +23,7 @@
     <label
       for="email"
       class="text-[10px] md:text-xs font-sans font-bold tracking-normal text-brand-black uppercase"
-      >Correo Corporativo</label
+      >Email</label
     >
     <input
       type="email"
@@ -39,7 +39,7 @@
     <label
       for="description"
       class="text-[10px] md:text-xs font-sans font-bold tracking-normal text-brand-black uppercase"
-      >Descripción Del Proyecto</label
+      >Mensaje</label
     >
     <textarea
       id="description"
@@ -92,14 +92,14 @@
     const email = formData.get("email")?.toString() || "";
     const description = formData.get("description")?.toString() || "";
 
-    // Save lead in the background
-    fetch('/api/leads', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, description })
-    }).catch(err => console.error("Error guardando el lead:", err));
+    // Save final lead in the background
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, description, isPartial: false }),
+    }).catch((err) => console.error("Error guardando el lead:", err));
 
-    const text = `hola humanoides & asociados me llamo ${name} y quiero trabajar con ustedes, mi email es:${email}. El proyecto consiste en: ${description}. Saludos!`;
+    const text = `hola soy ${name}(${email}) y este es mi mensaje: ${description}`;
     const encodedText = encodeURIComponent(text);
     const whatsappUrl = `https://api.whatsapp.com/send?phone=34600088257&text=${encodedText}`;
 
@@ -107,5 +107,26 @@
 
     // Optional: clear form
     form.reset();
+  });
+
+  // Capture lead on email blur (Abandonment Capture)
+  const nameInput = document.getElementById("name") as HTMLInputElement;
+  const emailInput = document.getElementById("email") as HTMLInputElement;
+
+  let lastCapturedEmail = "";
+
+  emailInput?.addEventListener("blur", () => {
+    const email = emailInput.value.trim();
+    if (email && email.includes("@") && email !== lastCapturedEmail) {
+      lastCapturedEmail = email;
+      const name = nameInput?.value.trim() || "";
+      const description = descriptionInput?.value.trim() || "";
+
+      fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, description, isPartial: true }),
+      }).catch((err) => console.error("Error guardando borrador:", err));
+    }
   });
 </script>
