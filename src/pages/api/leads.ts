@@ -62,16 +62,31 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     // Assuming the first sheet is the one we want to write to
     const sheet = doc.sheetsByIndex[0]; 
 
-    // Append standard row
-    await sheet.addRow({
-      Nombre: parsedData.name || (parsedData.isPartial ? '(Borrador Incompleto)' : '(Sin Nombre)'),
-      Email: parsedData.email,
-      Descripción: parsedData.description || '(Sin Descripción)',
-      Fecha: fechaEnvio,
-      Hora: horaEnvio,
-      IP: ip,
-      Ubicación: ubicacion
-    });
+    // Get all rows to check for existing email
+    const rows = await sheet.getRows();
+    const existingRow = rows.find(row => row.get('Email') === parsedData.email);
+
+    if (existingRow) {
+      // Update existing row
+      existingRow.set('Nombre', parsedData.name || existingRow.get('Nombre') || (parsedData.isPartial ? '(Borrador Incompleto)' : '(Sin Nombre)'));
+      existingRow.set('Descripción', parsedData.description || existingRow.get('Descripción') || '(Sin Descripción)');
+      existingRow.set('Fecha', fechaEnvio);
+      existingRow.set('Hora', horaEnvio);
+      existingRow.set('IP', ip);
+      existingRow.set('Ubicación', ubicacion);
+      await existingRow.save();
+    } else {
+      // Append standard row
+      await sheet.addRow({
+        Nombre: parsedData.name || (parsedData.isPartial ? '(Borrador Incompleto)' : '(Sin Nombre)'),
+        Email: parsedData.email,
+        Descripción: parsedData.description || '(Sin Descripción)',
+        Fecha: fechaEnvio,
+        Hora: horaEnvio,
+        IP: ip,
+        Ubicación: ubicacion
+      });
+    }
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
