@@ -160,6 +160,7 @@ const allMembers = [...(leader ? [leader] : []), ...agents];
                 imgClassName={`w-full object-top object-center`}
                 widths={[400, 700]}
                 sizes="100vw"
+                loading="eager"
               />
               {/* CV button only for David */}
               {member.isLeader && member.cvLink && (
