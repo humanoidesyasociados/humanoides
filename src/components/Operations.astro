@@ -153,7 +153,7 @@ const allMembers = [...(leader ? [leader] : []), ...agents];
       {allMembers.map((member: any, i: number) => {
         return (
           <article class="shrink-0 w-full snap-center flex flex-col bg-brand-gray">
-            <div class="relative w-full overflow-hidden bg-brand-black">
+            <div class="relative w-full overflow-hidden bg-transparent">
               <ImageWithSkeleton
                 src={member.img}
                 alt={member.name}
@@ -258,8 +258,7 @@ const allMembers = [...(leader ? [leader] : []), ...agents];
     if (carousel && articles?.length) {
       const total = articles.length;
       const slideLabels = Array.from(articles).map((art, i) => {
-        const nameEl = art.querySelector<HTMLElement>("h3");
-        return nameEl?.textContent || "";
+        return i === 0 ? "HUMANOIDE" : `ASOCIADO ${String(i).padStart(2, "0")}`;
       });
       const labelEl = document.getElementById("ops-label");
       const update = () => {
