@@ -113,7 +113,7 @@ const allMembers = [...(leader ? [leader] : []), ...agents];
           </div>
 
           <!-- Content: watermark logo + text -->
-          <div class="relative flex flex-col flex-1 p-6 border-t border-brand-black overflow-hidden">
+          <div class="relative flex flex-col flex-1 p-6 border-t border-brand-black overflow-hidden bg-brand-gray">
             {/* AI logo watermark — large, low opacity, cropped off bottom-right corner */}
             {member.aiLogo && (
               <div
@@ -230,19 +230,18 @@ const allMembers = [...(leader ? [leader] : []), ...agents];
     document.querySelectorAll<HTMLElement>(".ops-card").forEach((card, idx) => {
       const reveal   = card.querySelector<HTMLElement>(".ops-img-reveal");
       const descLine = card.querySelector<HTMLElement>(".ops-desc-line");
-      if (reveal && !prefersReduced)   reveal.style.transition   = `transform 0.9s cubic-bezier(0.16,1,0.3,1) ${idx * 0.1}s`;
-      if (descLine && !prefersReduced) {
-        descLine.style.transform  = "scaleX(0)";
-        descLine.style.transition = `transform 0.7s cubic-bezier(0.16,1,0.3,1) ${idx * 0.1 + 0.35}s`;
-      }
-      new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            if (reveal)   reveal.style.transform   = "scaleY(0)";
-            if (descLine) descLine.style.transform = "scaleX(1)";
-          }
-        });
-      }, { threshold: 0.15 }).observe(card);
+      
+      // Fallback: Just reveal them automatically after a short delay on load to prevent production invisible bug
+      setTimeout(() => {
+        if (reveal) {
+          reveal.style.transition = `transform 0.9s cubic-bezier(0.16,1,0.3,1) ${idx * 0.1}s`;
+          reveal.style.transform = "scaleY(0)";
+        }
+        if (descLine) {
+          descLine.style.transition = `transform 0.7s cubic-bezier(0.16,1,0.3,1) ${idx * 0.1 + 0.35}s`;
+          descLine.style.transform = "scaleX(1)";
+        }
+      }, 300);
     });
 
     if (!prefersReduced) {
